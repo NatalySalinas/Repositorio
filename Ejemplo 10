@@ -1,0 +1,33 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Ingrese el monto del consumo: ");
+        double montoConsumo = Convert.ToDouble(Console.ReadLine());
+
+        double descuento = 0.0;
+        double impuesto = 0.0;
+        double subtotal = 0.0;
+        double importeAPagar = 0.0;
+
+        if (montoConsumo <= 100.00)
+        {
+            descuento = montoConsumo * 0.10; 
+        }
+        else
+        {
+            descuento = montoConsumo * 0.20;
+        }
+
+        impuesto = montoConsumo * 0.18; 
+        subtotal = montoConsumo - descuento;
+        importeAPagar = subtotal + impuesto;
+
+        Console.WriteLine("Monto del descuento: S/ " + descuento.ToString("0.00"));
+        Console.WriteLine("Impuesto: S/ " + impuesto.ToString("0.00"));
+        Console.WriteLine("Subtotal: S/ " + subtotal.ToString("0.00"));
+        Console.WriteLine("Importe a pagar: S/ " + importeAPagar.ToString("0.00"));
+    }
+}
