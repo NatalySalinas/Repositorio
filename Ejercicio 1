@@ -1,0 +1,67 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Tipos de frutas disponibles:");
+        Console.WriteLine("1. Naranja");
+        Console.WriteLine("2. Fresa");
+        Console.WriteLine("3. Mango");
+
+        Console.Write("Por favor, seleccione el tipo de fruta (1/2/3): ");
+        int tipoFruta = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Por favor, ingrese la distancia en kilómetros: ");
+        int distanciaKm = Convert.ToInt32(Console.ReadLine());
+
+        double precioPorCaja = 0.0;
+
+        switch (tipoFruta)
+        {
+            case 1: 
+                if (distanciaKm < 30)
+                {
+                    precioPorCaja = 2.00;
+                }
+                else
+                {
+                    precioPorCaja = 4.00;
+                }
+                break;
+
+            case 2: 
+                if (distanciaKm < 30)
+                {
+                    precioPorCaja = 6.00;
+                }
+                else
+                {
+                    precioPorCaja = 9.00;
+                }
+                break;
+
+            case 3: 
+                if (distanciaKm < 30)
+                {
+                    precioPorCaja = 3.00;
+                }
+                else
+                {
+                    precioPorCaja = 5.00;
+                }
+                break;
+
+            default:
+                Console.WriteLine("Tipo de fruta no válido.");
+                return;
+        }
+
+        Console.Write("Por favor, ingrese la cantidad de cajas de frutas: ");
+        int cantidadCajas = Convert.ToInt32(Console.ReadLine());
+
+        double costoTotal = cantidadCajas * precioPorCaja;
+
+        Console.WriteLine("El costo total del transporte es: S/ " + costoTotal.ToString("0.00"));
+    }
+}
