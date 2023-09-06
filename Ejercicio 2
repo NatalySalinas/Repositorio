@@ -1,0 +1,64 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Categorías de hotel disponibles:");
+        Console.WriteLine("1)Tres estrellas");
+        Console.WriteLine("2)Cinco estrellas");
+
+        Console.Write("Por favor, seleccione la categoría del hotel (1/2): ");
+        int categoriaHotel = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Tambien, seleccione la cantidad de días de estadía: ");
+        int diasEstadia = Convert.ToInt32(Console.ReadLine());
+
+        double costoPorDia = 0.0;
+
+        if (diasEstadia >= 1 && diasEstadia <= 5)
+        {
+            if (categoriaHotel == 1) 
+            {
+                costoPorDia = 100.00;
+            }
+            else if (categoriaHotel == 2) 
+            {
+                costoPorDia = 300.00;
+            }
+        }
+        else if (diasEstadia >= 6 && diasEstadia <= 10)
+        {
+            if (categoriaHotel == 1) 
+            {
+                costoPorDia = 85.00;
+            }
+            else if (categoriaHotel == 2) // 
+            {
+                costoPorDia = 270.00;
+            }
+        }
+        else if (diasEstadia >= 11)
+        {
+            if (categoriaHotel == 1) 
+            {
+                costoPorDia = 70.00;
+            }
+            else if (categoriaHotel == 2) 
+            {
+                costoPorDia = 250.00;
+            }
+        }
+        else
+        {
+            Console.WriteLine("Número de días de estadía no válido.");
+            return;
+        }
+
+        double costoDesayuno = 7.00 * diasEstadia;
+
+        double costoTotal = costoPorDia * diasEstadia + costoDesayuno;
+
+        Console.WriteLine("El costo total del hospedaje es de : S/ " + costoTotal.ToString("0.00"));
+    }
+}
