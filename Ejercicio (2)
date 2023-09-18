@@ -1,0 +1,22 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Por favor, ingrese la base: ");
+        float baseNumero = Convert.ToSingle(Console.ReadLine());
+
+        Console.Write("Por favor, ingrese el exponente: ");
+        int exponente = Convert.ToInt32(Console.ReadLine());
+
+        float resultado = 1.0f;
+
+        for (int i = 0; i < exponente; i++)
+        {
+            resultado *= baseNumero;
+        }
+
+        Console.WriteLine("La potencia es: " + resultado);
+    }
+}
