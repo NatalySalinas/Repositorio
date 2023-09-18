@@ -1,0 +1,23 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Por favor, ingrese la cantidad de notas: ");
+        int cantidadNotas = Convert.ToInt32(Console.ReadLine());
+
+        float sumaNotas = 0.0f; 
+
+        for (int i = 1; i <= cantidadNotas; i++)
+        {
+            Console.Write("También, ingrese la nota: ");
+            float nota = Convert.ToSingle(Console.ReadLine()); 
+            sumaNotas += nota;
+        }
+
+        float promedio = sumaNotas / cantidadNotas; 
+
+        Console.WriteLine($"El promedio de las {cantidadNotas} notas es: {promedio.ToString("0.00")}");
+    }
+}
