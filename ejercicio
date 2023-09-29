@@ -1,0 +1,91 @@
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Ingrese un número máximo de personas: ");
+        int numeroMaximo = Convert.ToInt32(Console.ReadLine());
+        int asistentesActuales = 0;
+        int personasIngresaron = 0;
+        int personasSalieron = 0;
+        int vecesLleno = 0;
+        int vecesVacio = 0;
+
+        Console.WriteLine("===================================");
+        Console.WriteLine($"El número máximo establecido es de {numeroMaximo} personas, presione una tecla para comenzar a contar.");
+        Console.ReadKey();
+
+        while (true)
+        {
+            Console.Clear();
+            double porcentajeAforo = (double)asistentesActuales / numeroMaximo * 100;
+
+            Console.WriteLine("===============================================");
+            Console.WriteLine($"| Asistentes actuales    | {asistentesActuales}");
+            Console.WriteLine($"| Aforo                  | {porcentajeAforo:F2}%");
+            Console.WriteLine($"| Máximo                 | {numeroMaximo} personas");
+            Console.WriteLine("===============================================");
+            Console.WriteLine("Presione");
+            Console.WriteLine("[ i ] si ingresa una persona");
+            Console.WriteLine("[ s ] si sale una persona");
+            Console.WriteLine("[ x ] para terminar");
+
+            char opcion = Console.ReadKey().KeyChar;
+
+            switch (opcion)
+            {
+                case 'i':
+                    if (asistentesActuales < numeroMaximo)
+                    {
+                        asistentesActuales++;
+                        personasIngresaron++;
+                        Console.WriteLine("\nPersona ingresó al local.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nEl local está lleno, no se permite la entrada de más personas.");
+                    }
+                    break;
+                case 's':
+                    if (asistentesActuales > 0)
+                    {
+                        asistentesActuales--;
+                        personasSalieron++;
+                        Console.WriteLine("\nPersona salió del local.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo hay personas en el local para que salgan.");
+                    }
+                    break;
+                case 'x':
+                    Console.WriteLine("\nPrograma finalizado.");
+                    Console.Clear();
+                    Console.WriteLine("============================");
+                    Console.WriteLine("El programa ha terminado");
+                    Console.WriteLine("============================");
+                    Console.WriteLine("Estadísticas:");
+                    Console.WriteLine("---------------------------------------------");
+                    Console.WriteLine($"{personasIngresaron} personas ingresaron");
+                    Console.WriteLine($"{personasSalieron} personas salieron");
+                    Console.WriteLine($"{vecesLleno} veces se llenó el local");
+                    Console.WriteLine($"Estuvo vacío {vecesVacio} veces");
+                    return;
+                default:
+                    Console.WriteLine("\nOpción no válida.");
+                    break;
+            }
+
+            if (asistentesActuales == numeroMaximo)
+            {
+                vecesLleno++;
+            }
+            else if (asistentesActuales == 0)
+            {
+                vecesVacio++;
+            }
+
+            Console.WriteLine("Presione una tecla para continuar...");
+            Console.ReadKey();
+        }
+    }
+}
