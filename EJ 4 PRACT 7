@@ -1,0 +1,19 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Ingresa un número: ");
+        int numero = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 0; i < numero; i++)
+        {
+            for (int j = 0; j < numero; j++)
+            {
+                Console.Write("**");
+            }
+            Console.WriteLine(); 
+        }
+    }
+}
