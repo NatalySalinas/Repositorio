@@ -1,0 +1,16 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Ingrese el valor de n: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 1; i <= n; i++)
+        {
+            float resultado = (float)(16.0 - i) / (3.0f * i);
+            Console.WriteLine($"Resultado {i}: {resultado:F9}");
+        }
+    }
+}
