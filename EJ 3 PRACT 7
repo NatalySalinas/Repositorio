@@ -1,0 +1,27 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int añoInicio = 1900;
+        int añoActual = DateTime.Now.Year;
+
+        Console.WriteLine("Años bisiestos desde 1900 hasta el año actual:");
+
+        for (int año = añoInicio; año <= añoActual; año++)
+        {
+            if (EsBisiesto(año))
+            {
+                Console.WriteLine(año);
+            }
+        }
+    }
+
+    static bool EsBisiesto(int año)
+    {
+        
+        return (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
+    }
+}
+
