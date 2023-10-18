@@ -1,0 +1,244 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static Dictionary<string, int> inventory = new Dictionary<string, int>
+    {
+        { "limpieza", 0 },
+        { "abarrotes", 0 },
+        { "golosinas", 0 },
+        { "electrónicos", 0 }
+    };
+
+    static Dictionary<string, double> cajaPorRubro = new Dictionary<string, double>
+    {
+        { "limpieza", 0.0 },
+        { "abarrotes", 0.0 },
+        { "golosinas", 0.0 },
+        { "electrónicos", 0.0 }
+    };
+
+    static double cajaGeneral = 0.0;
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("=======================");
+            Console.WriteLine("Tienda de Don Lucas");
+            Console.WriteLine("=======================");
+            Console.WriteLine("1. Registrar venta");
+            Console.WriteLine("2. Registrar devolución");
+            Console.WriteLine("3. Cerrar caja");
+            Console.WriteLine("4. Salir");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    RegistrarVenta();
+                    break;
+                case 2:
+                    RegistrarDevolucion();
+                    break;
+                case 3:
+                    CerrarCaja();
+                    break;
+                case 4:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        }
+    }
+
+    static void RegistrarVenta()
+    {
+        while (true)
+        {
+            Console.WriteLine("=======================");
+            Console.WriteLine("Registrar venta de:");
+            Console.WriteLine("=======================");
+            Console.WriteLine("1. Limpieza");
+            Console.WriteLine("2. Abarrotes");
+            Console.WriteLine("3. Golosinas");
+            Console.WriteLine("4. Electrónicos");
+            Console.WriteLine("5. <- Regresar");
+            Console.WriteLine("=======================");
+            Console.Write("Ingrese una opción: ");
+
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            if (option >= 1 && option <= 4)
+            {
+                string categoria = ObtenerCategoriaPorOpcion(option);
+                Console.WriteLine($"Registrar venta de {categoria}");
+                Console.Write("Ingrese cantidad (unidades): ");
+                int cantidadVendida = Convert.ToInt32(Console.ReadLine());
+
+                if (cantidadVendida < 0)
+                {
+                    Console.WriteLine("La cantidad debe ser un valor positivo.");
+                    return;
+                }
+
+                Console.Write("Ingrese precio por unidad: ");
+                double precioUnitario = Convert.ToDouble(Console.ReadLine());
+
+                double totalVenta = cantidadVendida * precioUnitario;
+                inventory[categoria] += cantidadVendida;
+                cajaPorRubro[categoria] += totalVenta;
+                cajaGeneral += totalVenta;
+
+                Console.WriteLine("=======================");
+                Console.WriteLine($"Se han ingresado {cantidadVendida} unidades");
+                Console.WriteLine($"Se han ingresado S/. {totalVenta} a la caja");
+                Console.WriteLine("=======================");
+
+                Console.WriteLine("1: Registrar más productos de " + categoria);
+                Console.WriteLine("2: <- Regresar");
+                Console.WriteLine("=======================");
+                Console.Write("Ingrese una opción: ");
+                int moreOption = Convert.ToInt32(Console.ReadLine());
+
+                if (moreOption == 1)
+                {
+                    continue;
+                }
+                else if (moreOption == 2)
+                {
+                    break;
+                }
+            }
+            else if (option == 5)
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+            }
+        }
+    }
+
+    static void RegistrarDevolucion()
+    {
+        while (true)
+        {
+            Console.WriteLine("=======================");
+            Console.WriteLine("Registrar devolución de:");
+            Console.WriteLine("=======================");
+            Console.WriteLine("1. Limpieza");
+            Console.WriteLine("2. Abarrotes");
+            Console.WriteLine("3. Golosinas");
+            Console.WriteLine("4. Electrónicos");
+            Console.WriteLine("5. <- Regresar");
+            Console.WriteLine("=======================");
+            Console.Write("Ingrese una opción: ");
+
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            if (option >= 1 && option <= 4)
+            {
+                string categoria = ObtenerCategoriaPorOpcion(option);
+                Console.WriteLine($"Registrar devolución de {categoria}");
+                Console.Write("Ingrese cantidad (unidades): ");
+                int cantidadDevuelta = Convert.ToInt32(Console.ReadLine());
+
+                if (cantidadDevuelta < 0)
+                {
+                    Console.println("La cantidad debe ser un valor positivo.");
+                    return;
+                }
+
+                Console.Write("Ingrese precio por unidad: ");
+                double precioUnitario = Convert.ToDouble(Console.ReadLine());
+
+                double totalDevolucion = cantidadDevuelta * precioUnitario;
+                inventory[categoria] -= cantidadDevuelta;
+                cajaPorRubro[categoria] -= totalDevolucion;
+                cajaGeneral -= totalDevolucion;
+
+                Console.WriteLine("=======================");
+                Console.WriteLine($"Se han regresado {cantidadDevuelta} unidades");
+                Console.WriteLine($"Se han devuelto S/. {totalDevolucion} a la caja");
+                Console.WriteLine("=======================");
+
+                Console.WriteLine("1: Devolver más productos de " + categoria);
+                Console.WriteLine("2: <- Regresar");
+                Console.WriteLine("=======================");
+                Console.Write("Ingrese una opción: ");
+                int moreOption = Convert.ToInt32(Console.ReadLine());
+
+                if (moreOption == 1)
+                {
+                    continue;
+                }
+                else if (moreOption == 2)
+                {
+                    break;
+                }
+            }
+            else if (option == 5)
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+            }
+        }
+    }
+
+    static void CerrarCaja()
+    {
+        Console.WriteLine("Resumen de ventas por categoría:");
+        foreach (var kvp in inventory)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value} unidades vendidas");
+        }
+
+        Console.WriteLine("\nEstadísticas de caja por rubro:");
+        foreach (var kvp in cajaPorRubro)
+        {
+            Console.WriteLine($"{kvp.Key}: S/. {kvp.Value}");
+        }
+
+        double totalInventario = 0.0;
+        foreach (var kvp in inventory)
+        {
+            totalInventario += kvp.Value;
+        }
+
+        Console.WriteLine("\nTotal en inventario por rubro:");
+        foreach (var kvp in inventory)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value} unidades en inventario");
+        }
+
+        Console.WriteLine("\nTotal en caja general: S/. " + cajaGeneral);
+    }
+}
+
+         static string ObtenerCategoriaPorOpcion(int opcion)
+{
+    switch (opcion)
+    {
+        case 1:
+            return "limpieza";
+        case 2:
+            return "abarrotes";
+        case 3:
+            return "golosinas";
+        case 4:
+            return "electrónicos";
+        default:
+            return string.Empty;
+    }
+}
+}
+
